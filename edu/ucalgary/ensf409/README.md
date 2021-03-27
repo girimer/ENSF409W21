@@ -1,2 +1,2 @@
-# ENSF409ProjectW21
-Group members: Zach Welsh, Girimer Singh, Gian Luke Adug
+# Class directory
+This is where we'll be putting our actual java code.
