@@ -1,7 +1,7 @@
 mport java.util.Scanner;
 
 
-public class Testing {
+public class RunProgram {
 
         public static void main(String[] args){
                 Scanner input = new Scanner(System.in);
@@ -14,8 +14,6 @@ public class Testing {
                 userName= input.next();
                 System.out.println("Please enter password: ");
                 password=input.next();
-
-                Inventory myTable = new Inventory("jdbc:mysql://localhost/inventory","root", "Frosty1");
 
                 //Inventory myTable = new Inventory(databaseURL,userName, password);
                 myTable.initializeConnection();
