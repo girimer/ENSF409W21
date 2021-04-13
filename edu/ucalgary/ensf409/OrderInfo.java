@@ -7,18 +7,18 @@ import java.util.Date;
 /**
 * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a> 
 * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
-* @version 1.0
+* @version 1.2
 * @since 1.0
  */
 
-public interface OrderInfo{
+public class OrderInfo{
 
     /**
      * Generates the output file.
      * @param cheapestCombo A formatted String containing the cheapest combination of equipment and its total price.
      * @param request The initial furniture request supplied to the program, as a single String
      */
-    public default void orderForm(String request, String cheapestCombo) throws IOException{
+    public void orderForm(String request, String cheapestCombo) throws IOException{
         FileWriter out = null;
         try{
             out = new FileWriter("OrderForm.txt");
@@ -41,7 +41,7 @@ public interface OrderInfo{
     /**
      * When an order is placed, removes ordered items from the inventory database.
      */
-    public default void updateInventory(Inventory toUpdate, String[] removeIDs){
+    public void updateInventory(Inventory toUpdate, String[] removeIDs){
         //need database connection. so we pass our Inventory object
         toUpdate.updateInventory(removeIDs);
     }
