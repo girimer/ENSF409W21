@@ -203,8 +203,20 @@ public class Inventory{
 
         return allManufacturer;
     }
+        
+    public void deleteID(String table, String ID){
+        try {
+            String query = "DELETE FROM "+table+ " WHERE ID = ?";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
 
+            myStmt.setString(1, ID);
+            myStmt.executeUpdate();
+            myStmt.close();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
 
 
