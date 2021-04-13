@@ -15,20 +15,17 @@ public interface OrderInfo{
 
     /**
      * Generates the output file.
-     * @param cheapestCombo An array of type furniture containing the cheapest combination of used furniture for the application.
+     * @param cheapestCombo A formatted String containing the cheapest combination of equipment and its total price.
      * @param request The initial furniture request supplied to the program, as a single String
      */
-    public default void orderForm(String request, Furniture[] cheapestCombo) throws IOException{
+    public default void orderForm(String request, String cheapestCombo) throws IOException{
         FileWriter out = null;
         try{
             out = new FileWriter("OrderForm.txt");
             out.write("Furniture Order Form \nRequest: ");
             out.write(request);
-            out.write("\nItems ordered");
-            for(int i=0; i<cheapestCombo.length; i++){
-                out.write("\nID:");
-                out.write(cheapestCombo[i].ID); //to implement: show price, department, contact
-            }
+            out.write("\nItems ordered\n");
+            out.write(cheapestCombo);
             DateFormat td = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
             Date now = new Date();
             out.write("\n\nRequest filled: " + td.format(now) + "\n");
@@ -38,22 +35,21 @@ public interface OrderInfo{
                 out.close();
             }
         }
+        //updateInventory();
     }
 
     /**
      * When an order is placed, removes ordered items from the inventory database.
      */
-    public default void updateInventory(){
-        //need database connection. are we adding one to this interface?
+    public default void updateInventory(Inventory toUpdate, String[] removeIDs){
+        //need database connection. so we pass our Inventory object
+        toUpdate.updateInventory(removeIDs);
     }
 
-    /**
-     * Returns a suggested supplier for a piece of furniture.
-     * @return A String containing the name of the suggested supplier for the requested item.
-     */
-    public default String suggestedSupplier(Furniture[] cheapestCombo){
-        //also needs database connection
-        //uses database info to return the manufacturer associated with each furniture's manuID
-        return "";
-    }
+    
+    /*public default String suggestedSupplier(String suggestedManufacturers){
+        //suggested suppliers only exist as instance variables, so we're already passing them
+        //what purpose does this method serve?
+        return suggestedManufacturers;
+    }*/
 }
