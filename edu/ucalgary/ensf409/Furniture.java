@@ -22,6 +22,39 @@ public class Furniture {
         this.type= type;
         this.numberOfUnit=numberOfUnit;
     }
+    
+    public int getNumberOfUnit() {
+        return numberOfUnit;
+    }
+
+    public Inventory getStockDetails() {
+        return stockDetails;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setNumberOfUnit(int numberOfUnit) {
+        this.numberOfUnit = numberOfUnit;
+    }
+
+    public void setStockDetails(Inventory stockDetails) {
+        this.stockDetails = stockDetails;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     /**
      * Method uses Inventory variable to get the inventory of ordered type from a database table.
