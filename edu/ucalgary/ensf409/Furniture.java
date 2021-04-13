@@ -167,6 +167,10 @@ public class Furniture {
             result[result.length - len] = Items[i];                                 // adding elements to result
             combinations(Items, len-1, i+1, result, returnList);          // recursive call progressing towards base case, adding elements to result array
         }
+         for (int i = begin; i <= Items.length-len; i++){                            // iterating over all array elements
+            result[result.length - len] = Items[i];                                 // adding elements to result
+            combinations(Items, len-1, i+1, result, returnList);          // recursive call progressing towards base case, adding elements to result array
+        }
     }
 
 }
