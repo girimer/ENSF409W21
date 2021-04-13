@@ -23,6 +23,10 @@ public class Furniture {
         this.numberOfUnit=numberOfUnit;
     }
     
+    public Furniture() {
+
+    }
+    
     public int getNumberOfUnit() {
         return numberOfUnit;
     }
@@ -82,7 +86,7 @@ public class Furniture {
        System.out.println();
 
         if (temp10.isEmpty()){                                      // if no combination are possible based on ordered quantity output message.
-            System.out.println("Order not possible");
+            System.out.println("This quantity is not available to be ordered, please select order different quantity or item");
            return;
         }
         else{
@@ -157,7 +161,10 @@ public class Furniture {
        else {                                                               // If order variable is not empty then is passed to cheapestOption methods to check for cheapest option.
             returnString = cheapestOption(order.toString());
             System.out.println("Return string: " + returnString);
-
+            for (int i=2; i<returnString.split(" ").length; i++){
+                stockDetails.deleteID(tableName, returnString.split(" ")[i]);  // Delete all IDs from database that are ordered successfully.
+            }
+           
         }
     }
 
@@ -197,10 +204,6 @@ public class Furniture {
             return;
         }
         for (int i = begin; i <= Items.length-len; i++){                            // iterating over all array elements
-            result[result.length - len] = Items[i];                                 // adding elements to result
-            combinations(Items, len-1, i+1, result, returnList);          // recursive call progressing towards base case, adding elements to result array
-        }
-         for (int i = begin; i <= Items.length-len; i++){                            // iterating over all array elements
             result[result.length - len] = Items[i];                                 // adding elements to result
             combinations(Items, len-1, i+1, result, returnList);          // recursive call progressing towards base case, adding elements to result array
         }
