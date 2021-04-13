@@ -124,7 +124,7 @@ public class Inventory{
             }
         }
 
-        else if (tableName.equals("Filing")){
+        else if (tableName.equals("filing")){
             try {
                 Statement myStmt = dbConnect.createStatement();
                 results = myStmt.executeQuery("SELECT * FROM " + tableName);
@@ -164,7 +164,10 @@ public class Inventory{
                 ex.printStackTrace();
             }
         }
-
+        else {
+            System.exit(1);
+        }
+        
         return AllStock.toString();
     }
 
@@ -192,10 +195,7 @@ public class Inventory{
         for(int j=0; j< allManufacturerID.size(); j++){
             for(int k=0; k<temp2[0].split(" ").length; k++){
                 if(allManufacturerID.get(j).equals(temp2[k].split(" ")[0])){
-                    for(int l=1; l<temp2[0].split(" ").length-2; l++) {
-                        allManufacturer = allManufacturer+((temp2[k].split(" ")[l]));
-                        allManufacturer=allManufacturer+ " ";
-                    }
+                    allManufacturer= allManufacturer+temp2[k].substring(4);
                     allManufacturer= allManufacturer+'\n';
                 }
             }
