@@ -15,7 +15,7 @@ public class RunProgram {
                 System.out.println("Please enter password: ");
                 password=input.next();
 
-                //Inventory myTable = new Inventory(databaseURL,userName, password);
+                Inventory myTable = new Inventory(databaseURL,userName, password);
                 myTable.initializeConnection();
 
                 int type;
@@ -59,6 +59,66 @@ public class RunProgram {
                                         newOrder.RequestedType();
                                 }
                                 break;
+                                
+                                case 2:
+                                System.out.println("Please select the type of Desk: ");
+                                System.out.println("1. Standing");
+                                System.out.println("2. Adjustable");
+                                System.out.println("3. Traditional");
+                                type = input.nextInt();
+                                System.out.println("Please enter the order quantity: ");
+                                quantity = input.nextInt();
+                                if (type == 1) {
+                                        Chair newOrder = new Chair("desk", "Standing", myTable, quantity);
+                                        newOrder.RequestedType();
+                                } else if (type == 2) {
+                                        Chair newOrder = new Chair("desk", "Adjustable", myTable, quantity);
+                                        newOrder.RequestedType();
+                                } else if (type == 3) {
+                                        Chair newOrder = new Chair("desk", "Traditional", myTable, quantity);
+                                        newOrder.RequestedType();
+                                }
+                                break;
+
+                        case 3:
+                                System.out.println("Please select the type of Lamp: ");
+                                System.out.println("1. Desk");
+                                System.out.println("2. Study");
+                                System.out.println("3. Swing Arm");
+                                type = input.nextInt();
+                                System.out.println("Please enter the order quantity: ");
+                                quantity = input.nextInt();
+                                if (type == 1) {
+                                        Chair newOrder = new Chair("lamp", "Desk", myTable, quantity);
+                                        newOrder.RequestedType();
+                                } else if (type == 2) {
+                                        Chair newOrder = new Chair("lamp", "Study", myTable, quantity);
+                                        newOrder.RequestedType();
+                                } else if (type == 3) {
+                                        Chair newOrder = new Chair("lamp", "Swing_Arm", myTable, quantity);
+                                        newOrder.RequestedType();
+                                }
+                                break;
+
+                        case 4:
+                                System.out.println("Please select the type of Filing: ");
+                                System.out.println("1. Small");
+                                System.out.println("2. Medium");
+                                System.out.println("3. Large");
+                                type = input.nextInt();
+                                System.out.println("Please enter the order quantity: ");
+                                quantity = input.nextInt();
+                                if (type == 1) {
+                                        Chair newOrder = new Chair("filing", "Small", myTable, quantity);
+                                        newOrder.RequestedType();
+                                } else if (type == 2) {
+                                        Chair newOrder = new Chair("filing", "Medium", myTable, quantity);
+                                        newOrder.RequestedType();
+                                } else if (type == 3) {
+                                        Chair newOrder = new Chair("filing", "Large", myTable, quantity);
+                                        newOrder.RequestedType();
+                                }
+                                break;
                         default:
                                 System.out.println("Invalid input");
                                 break;
@@ -67,6 +127,7 @@ public class RunProgram {
                         if (input.next().equals("N")){
                                 exit = true;
                         }
+                        System.out.println();
                 } while (!exit);
 
 
