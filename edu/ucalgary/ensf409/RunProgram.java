@@ -1,14 +1,13 @@
-/**
- * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
- * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
- * @version 1.2
- * @since 1.0
- */
-
+//package declaration goes here
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
+ * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
+ * @version 1.3
+ * @since 1.0
+ */
 public class RunProgram {
 
         public static void main(String[] args) throws IOException {
@@ -53,19 +52,19 @@ public class RunProgram {
                                 quantity = input.nextInt();
                                 if (type == 1) {
                                         Chair newOrder = new Chair("chair", "Kneeling", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 2) {
                                         Chair newOrder = new Chair("chair", "Task", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 3) {
                                         Chair newOrder = new Chair("chair", "Mesh", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 4) {
                                         Chair newOrder = new Chair("chair", "Executive", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 5) {
                                         Chair newOrder = new Chair("chair", "Ergonomics", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 }
                                 break;
 
@@ -79,13 +78,13 @@ public class RunProgram {
                                 quantity = input.nextInt();
                                 if (type == 1) {
                                         Chair newOrder = new Chair("desk", "Standing", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 2) {
                                         Chair newOrder = new Chair("desk", "Adjustable", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 3) {
                                         Chair newOrder = new Chair("desk", "Traditional", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 }
                                 break;
 
@@ -99,13 +98,13 @@ public class RunProgram {
                                 quantity = input.nextInt();
                                 if (type == 1) {
                                         Chair newOrder = new Chair("lamp", "Desk", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 2) {
                                         Chair newOrder = new Chair("lamp", "Study", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 3) {
                                         Chair newOrder = new Chair("lamp", "Swing_Arm", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 }
                                 break;
 
@@ -119,13 +118,13 @@ public class RunProgram {
                                 quantity = input.nextInt();
                                 if (type == 1) {
                                         Chair newOrder = new Chair("filing", "Small", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 2) {
                                         Chair newOrder = new Chair("filing", "Medium", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 } else if (type == 3) {
                                         Chair newOrder = new Chair("filing", "Large", myTable, quantity);
-                                        newOrder.RequestedType();
+                                        newOrder.requestedType();
                                 }
                                 break;
 
