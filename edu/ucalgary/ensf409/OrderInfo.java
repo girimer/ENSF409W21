@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409; //this causes a compilation error for me.
+package edu.ucalgary.ensf409;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
