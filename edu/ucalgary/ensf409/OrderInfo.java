@@ -14,7 +14,9 @@ import java.util.Date;
 public class OrderInfo{
 
 
-    //need constructor and instance variables to reduce number of arguments
+    /**
+    * Default constructor 
+    */
     public OrderInfo(){
         //no instance variables to create
     }
@@ -63,4 +65,4 @@ public class OrderInfo{
     }
 
 
-
+}
