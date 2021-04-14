@@ -1,3 +1,10 @@
+/**
+ * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
+ * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
+ * @version 1.5
+ * @since 1.0
+ */
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,13 +32,20 @@ public class Inventory{
 
     }
 
+    /**
+     * This is default constructor.
+     *
+     */
+
     public Inventory() {
         this.DBURL = null;
         this.PASSWORD = null;
         this.USERNAME=null;
     }
 
-    //getter methods
+    /**
+     * Getter and setter methods
+     */
     public String getDBURL() {
         return DBURL;
     }
@@ -43,6 +57,19 @@ public class Inventory{
     public String getUSERNAME() {
         return USERNAME;
     }
+
+    public void setDbConnect(Connection dbConnect) {
+        this.dbConnect = dbConnect;
+    }
+
+    public void setResults(ResultSet results) {
+        this.results = results;
+    }
+
+    public ResultSet getResults() {
+        return results;
+    }
+
 
     /**
      * Method initialize connection to provided database with credential.
@@ -57,7 +84,11 @@ public class Inventory{
         }
     }
 
-
+    /**
+     * Method returns stock details from database
+     * @param tableName name of the table to get data from.
+     * @return returns String containing all stock details.
+     */
     public String stockInventory (String tableName) {
         StringBuffer AllStock = new StringBuffer();
         int i = 0;
@@ -164,15 +195,20 @@ public class Inventory{
                 ex.printStackTrace();
             }
         }
-        else {
+        else {                                  // if table name provided is above listed tables, system exit
             System.exit(1);
         }
-        
+
         return AllStock.toString();
     }
 
+    /**
+     * Method returns manufacturers from the database
+     * @param tableName name of table to get manufacturer information
+     * @return String with manufacturer with their names, phone and province.
+     */
 
-    String manufacturers(String tableName){
+   public String manufacturers(String tableName){
         String temp =stockInventory(tableName);
         ArrayList <String> allManufacturerID= new ArrayList<>();
         String allManufacturer= "";
@@ -200,10 +236,15 @@ public class Inventory{
                 }
             }
         }
-
+        allManufacturer=allManufacturer.trim();
         return allManufacturer;
     }
-        
+
+    /**
+     * Method deletes an ID from database.
+     * @param table Name of the table to delete ID from
+     * @param ID id to delete
+     */
     public void deleteID(String table, String ID){
         try {
             String query = "DELETE FROM "+table+ " WHERE ID = ?";
@@ -217,7 +258,36 @@ public class Inventory{
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Method add Id to filling table.
+     * @param ID, Type, Rails, Drawers, Cabinet, Price, ManuId: all table columns information
+     */
+    public void addIDtoFiling (String ID, String Type, String Rails, String Drawers, String Cabinet, int Price, String ManuID){
+
+        try {
+            String setQuery = "INSERT INTO filing (ID, Type, Rails, Drawers, Cabinet, Price, ManuID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement myStmt = dbConnect.prepareStatement(setQuery);
+
+            myStmt.setString(1, ID);
+            myStmt.setString(2, Type);
+            myStmt.setString(3, Rails);
+            myStmt.setString(4, Drawers);
+            myStmt.setString(5, Cabinet);
+            myStmt.setInt(6, Price);
+            myStmt.setString(7, ManuID);
+
+            myStmt.executeUpdate();
+            myStmt.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
 }
+
+
 
 
 
