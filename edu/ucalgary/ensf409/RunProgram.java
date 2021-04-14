@@ -1,4 +1,4 @@
-//package declaration goes here
+package edu.ucalgary.ensf409;
 import java.io.IOException;
 import java.util.Scanner;
 
