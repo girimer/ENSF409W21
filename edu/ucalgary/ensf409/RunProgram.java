@@ -1,9 +1,17 @@
-mport java.util.Scanner;
+/**
+ * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
+ * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
+ * @version 1.2
+ * @since 1.0
+ */
+
+import java.io.IOException;
+import java.util.Scanner;
 
 
 public class RunProgram {
 
-        public static void main(String[] args){
+        public static void main(String[] args) throws IOException {
                 Scanner input = new Scanner(System.in);
                 String databaseURL;
                 String userName;
@@ -15,6 +23,7 @@ public class RunProgram {
                 System.out.println("Please enter password: ");
                 password=input.next();
 
+              
                 Inventory myTable = new Inventory(databaseURL,userName, password);
                 myTable.initializeConnection();
 
@@ -24,16 +33,16 @@ public class RunProgram {
 
                 do {
                         System.out.println("Please select item to order: ");
-                System.out.println("1. Chair");
-                System.out.println("2. Desk");
-                System.out.println("3. Lamp");
-                System.out.println("4. Filing");
+                        System.out.println("1. Chair");
+                        System.out.println("2. Desk");
+                        System.out.println("3. Lamp");
+                        System.out.println("4. Filing");
 
-                int table = input.nextInt();
+                        int table = input.nextInt();
 
                 switch (table) {
                         case 1:
-                                System.out.println("Please select the type of chair: ");
+                                System.out.println("Please select the type of Chair: ");
                                 System.out.println("1. Kneeling");
                                 System.out.println("2. Task");
                                 System.out.println("3. Mesh");
@@ -59,8 +68,8 @@ public class RunProgram {
                                         newOrder.RequestedType();
                                 }
                                 break;
-                                
-                                case 2:
+
+                        case 2:
                                 System.out.println("Please select the type of Desk: ");
                                 System.out.println("1. Standing");
                                 System.out.println("2. Adjustable");
@@ -119,24 +128,15 @@ public class RunProgram {
                                         newOrder.RequestedType();
                                 }
                                 break;
+
                         default:
                                 System.out.println("Invalid input");
                                 break;
                 }
                         System.out.println("Would you like to continue, Y/N");
-                        if (input.next().equals("N")){
+                        if (input.next().equalsIgnoreCase("N")){
                                 exit = true;
                         }
-                        System.out.println();
                 } while (!exit);
-
-
-               /* String temp =myTable.stockInventory("lamp");
-                System.out.println(temp);
-                System.out.println();
-                Chair MyOrder= new Chair("lamp", "Swing_Arm", myTable, 3);
-                MyOrder.RequestedType();
-                System.out.println(MyOrder.chairManufacturer());*/
         }
-
 }
