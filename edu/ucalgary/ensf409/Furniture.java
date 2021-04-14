@@ -100,7 +100,7 @@ public class Furniture {
         for (int i=numberOfUnit; i<= typeOrdered.length; i++) {     // methods return all possible combinations ranging from min order quantity to max possible based on inventory.
             combinations(typeOrdered, i, 0, new String[i], temp10); //Example if 2 units of chair task are requested, output is all combination of 2 task ID's then combinations of 3 task ID's so on.
         }                                                                 // C3405 and C0914, ....., C3405 and C0914 and C1148
-        System.out.println(temp10.toString());
+        
        System.out.println();
 
         if (temp10.isEmpty()){                                      // if no combination are possible based on ordered quantity output message.
