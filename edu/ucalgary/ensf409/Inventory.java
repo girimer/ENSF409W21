@@ -1,14 +1,15 @@
-/**
- * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
- * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
- * @version 1.5
- * @since 1.0
- */
-
+//package statement should go here
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+/**
+ * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
+ * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
+ * @version 1.6
+ * @since 1.0
+ */
 
 public class Inventory{
     public final String DBURL; //store the database url information
@@ -20,7 +21,7 @@ public class Inventory{
 
 
     /**
-     * This constructor takes 3 parameter.
+     * This constructor takes 3 parameters.
      * @param DBURL Database URL String.
      * @param USERNAME Database access Username String.
      * @param PASSWORD Database access Password String.
@@ -33,8 +34,7 @@ public class Inventory{
     }
 
     /**
-     * This is default constructor.
-     *
+     * This is a default constructor.
      */
 
     public Inventory() {
@@ -43,9 +43,7 @@ public class Inventory{
         this.USERNAME=null;
     }
 
-    /**
-     * Getter and setter methods
-     */
+    //getter and setter methods
     public String getDBURL() {
         return DBURL;
     }
@@ -72,7 +70,7 @@ public class Inventory{
 
 
     /**
-     * Method initialize connection to provided database with credential.
+     * Method initializes connection to provided database with credentials.
      *
      */
     public void initializeConnection(){
@@ -85,12 +83,12 @@ public class Inventory{
     }
 
     /**
-     * Method returns stock details from database
-     * @param tableName name of the table to get data from.
-     * @return returns String containing all stock details.
+     * Method returns stock details from the database
+     * @param tableName Name of the table to get data from.
+     * @return A formatted String containing all stock details.
      */
     public String stockInventory (String tableName) {
-        StringBuffer AllStock = new StringBuffer();
+        StringBuffer allStock = new StringBuffer();
         int i = 0;
         if (tableName.equals("chair")) {
             try {
@@ -99,9 +97,9 @@ public class Inventory{
 
                 while (results.next()) {
                     if (i > 0) {
-                        AllStock.append('\n');
+                        allStock.append('\n');
                     }
-                    AllStock.append(results.getString("ID") + " " + results.getString("Type").replace(" ", "_")+ " " +results.getString("Legs")
+                    allStock.append(results.getString("ID") + " " + results.getString("Type").replace(" ", "_")+ " " +results.getString("Legs")
                             + " " +results.getString("Arms")+" " + results.getString("Seat")+" " + results.getString("Cushion")+" " +
                             results.getString("Price") +" " + results.getString("ManuID"));
                     i++;
@@ -120,9 +118,9 @@ public class Inventory{
 
                 while (results.next()) {
                     if (i > 0) {
-                        AllStock.append('\n');
+                        allStock.append('\n');
                     }
-                    AllStock.append(results.getString("ID") + " " + results.getString("Type")+ " " +results.getString("Legs")
+                    allStock.append(results.getString("ID") + " " + results.getString("Type")+ " " +results.getString("Legs")
                             + " " +results.getString("Top")+" " + results.getString("Drawer")+" " + results.getString("Price")
                             +" " + results.getString("ManuID"));
                     i++;
@@ -141,9 +139,9 @@ public class Inventory{
 
                 while (results.next()) {
                     if (i > 0) {
-                        AllStock.append('\n');
+                        allStock.append('\n');
                     }
-                    AllStock.append(results.getString("ID") + " " + results.getString("Type").replace(" ","_")+ " " +results.getString("Base")
+                    allStock.append(results.getString("ID") + " " + results.getString("Type").replace(" ","_")+ " " +results.getString("Base")
                             + " " +results.getString("Bulb")+" " + results.getString("Price")
                             +" " + results.getString("ManuID"));
                     i++;
@@ -162,9 +160,9 @@ public class Inventory{
 
                 while (results.next()) {
                     if (i > 0) {
-                        AllStock.append('\n');
+                        allStock.append('\n');
                     }
-                    AllStock.append(results.getString("ID") + " " + results.getString("Type")+ " " +results.getString("Rails")
+                    allStock.append(results.getString("ID") + " " + results.getString("Type")+ " " +results.getString("Rails")
                             + " " +results.getString("Drawers")+ " " +results.getString("Cabinet")
                             +" " + results.getString("Price")+" " + results.getString("ManuID"));
                     i++;
@@ -183,9 +181,9 @@ public class Inventory{
 
                 while (results.next()) {
                     if (i > 0) {
-                        AllStock.append('\n');
+                        allStock.append('\n');
                     }
-                    AllStock.append(results.getString("ManuID") + " " + results.getString("Name")+ " " +results.getString("Phone")
+                    allStock.append(results.getString("ManuID") + " " + results.getString("Name")+ " " +results.getString("Phone")
                             + " " +results.getString("Province"));
                     i++;
                 }
@@ -199,13 +197,13 @@ public class Inventory{
             System.exit(1);
         }
 
-        return AllStock.toString();
+        return allStock.toString();
     }
 
     /**
-     * Method returns manufacturers from the database
-     * @param tableName name of table to get manufacturer information
-     * @return String with manufacturer with their names, phone and province.
+     * Method returns manufacturers from the database.
+     * @param tableName Name of table to get manufacturer information from.
+     * @return String listing manufacturers with their names, phone and province.
      */
 
    public String manufacturers(String tableName){
@@ -242,8 +240,8 @@ public class Inventory{
 
     /**
      * Method deletes an ID from database.
-     * @param table Name of the table to delete ID from
-     * @param ID id to delete
+     * @param table Name of the table to delete the ID from
+     * @param ID ID to delete
      */
     public void deleteID(String table, String ID){
         try {
@@ -260,22 +258,28 @@ public class Inventory{
     }
 
     /**
-     * Method add Id to filling table.
-     * @param ID, Type, Rails, Drawers, Cabinet, Price, ManuId: all table columns information
+     * Method adds ID to filing table.
+     * @param ID Info for the table's ID column
+     * @param type Info for Type column
+     * @param rails Info for Rails column
+     * @param drawers Info for Drawers column
+     * @param cabinet Info for Cabinet column
+     * @param price Info for Price column
+     * @param manuID Info for ManuID column
      */
-    public void addIDtoFiling (String ID, String Type, String Rails, String Drawers, String Cabinet, int Price, String ManuID){
+    public void addIDtoFiling (String ID, String type, String rails, String drawers, String cabinet, int price, String manuID){
 
         try {
             String setQuery = "INSERT INTO filing (ID, Type, Rails, Drawers, Cabinet, Price, ManuID) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = dbConnect.prepareStatement(setQuery);
 
             myStmt.setString(1, ID);
-            myStmt.setString(2, Type);
-            myStmt.setString(3, Rails);
-            myStmt.setString(4, Drawers);
-            myStmt.setString(5, Cabinet);
-            myStmt.setInt(6, Price);
-            myStmt.setString(7, ManuID);
+            myStmt.setString(2, type);
+            myStmt.setString(3, rails);
+            myStmt.setString(4, drawers);
+            myStmt.setString(5, cabinet);
+            myStmt.setInt(6, price);
+            myStmt.setString(7, manuID);
 
             myStmt.executeUpdate();
             myStmt.close();
@@ -286,8 +290,3 @@ public class Inventory{
 
     }
 }
-
-
-
-
-
