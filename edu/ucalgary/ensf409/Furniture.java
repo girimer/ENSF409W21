@@ -1,12 +1,20 @@
+/**
+ * @author Zach Welsh <a href="mailto:zachary.welsh@ucalgary.ca">zachary.welsh@ucalgary.ca</a>
+ * @author Girimer Singh <a href="mailto:girimer.singh@ucalgary.ca">girimer.singh@ucalgary.ca</a>
+ * @version 1.8
+ * @since 1.0
+ */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Furniture {
-    String tableName;
-    String type;
-    int numberOfUnit;
-    Inventory stockDetails;
+    private String tableName;
+    private String type;
+    private int numberOfUnit;
+    public Inventory stockDetails;
+    private OrderInfo OrderItem;
 
     /**
      * This constructor takes 3 parameter.
@@ -21,12 +29,21 @@ public class Furniture {
         this.tableName= tableName;
         this.type= type;
         this.numberOfUnit=numberOfUnit;
+        this.OrderItem = new OrderInfo();
     }
-    
+
     public Furniture() {
+        this.stockDetails =null;
+        this.tableName = null;
+        this.type = null;
+        this.numberOfUnit = 0;
+        this.OrderItem = new OrderInfo();
 
     }
-    
+
+    /**
+     * Getter and Setter methods
+     */
     public int getNumberOfUnit() {
         return numberOfUnit;
     }
@@ -64,7 +81,7 @@ public class Furniture {
      * Method uses Inventory variable to get the inventory of ordered type from a database table.
      * and find all possible combinations for ordered type of item possible.
      */
-    public void RequestedType(){
+    public void RequestedType() throws IOException {
         ArrayList<String> Items = new ArrayList<>();
         String temp = stockDetails.stockInventory(tableName);
         String [] eachLine= temp.split("\n");                   //split the string output by new line of stockInventory method accessed from Inventory class.
@@ -79,15 +96,16 @@ public class Furniture {
         String [] typeOrdered = Items.toArray(new String[0]);        // ArrayList is converted to String array to pass as an argument to combinations method.
 
         ArrayList<String> temp10 = new ArrayList<>();               // String array is passed to combinations method to all possible combinations,
-        for (int i=numberOfUnit; i<= typeOrdered.length; i++) {     // methods return all possible combinations ranging to min order quantity to max possible based on inventory.
+        for (int i=numberOfUnit; i<= typeOrdered.length; i++) {     // methods return all possible combinations ranging from min order quantity to max possible based on inventory.
             combinations(typeOrdered, i, 0, new String[i], temp10); //Example if 2 units of chair task are requested, output is all combination of 2 task ID's then combinations of 3 task ID's so on.
         }                                                                 // C3405 and C0914, ....., C3405 and C0914 and C1148
-
+        System.out.println(temp10.toString());
        System.out.println();
 
         if (temp10.isEmpty()){                                      // if no combination are possible based on ordered quantity output message.
             System.out.println("This quantity is not available to be ordered, please select order different quantity or item");
-           return;
+            System.out.println("Suggested Manufacturer: \n"+stockDetails.manufacturers(this.tableName));
+           System.exit(1);
         }
         else{
         fullUnits(temp10, numberOfUnit);}                           // if combinations are possible pass ArrayList of combinations to full units function to check if full units can be possibly
@@ -96,10 +114,10 @@ public class Furniture {
     }
 
     /**
-     * Methods check how many full units can be built based on ArrayList of combinations
-     * Methods based on units ordered find all combinations that results in that many full units.
+     * Method check how many full units can be built based on ArrayList of combinations
+     * Method based on units ordered find all combinations that results in that many full units.
      */
-    public void fullUnits(ArrayList<String> AllInventoryType, int numberOfUnits) {
+    public void fullUnits(ArrayList<String> AllInventoryType, int numberOfUnits) throws IOException {
         String returnString;
         StringBuilder order = new StringBuilder();
         int fullUnits=10000000;
@@ -155,16 +173,16 @@ public class Furniture {
         }
 
         if(order.length()==0){                                              // After checking if order variable is empty, then a message is output
-            System.out.println("Not enough stock");
+            System.out.println("Not enough stock, please order lower quantity or a different item");
+            System.out.println("Suggested Manufacturer: \n"+stockDetails.manufacturers(this.tableName));
             return;
         }
        else {                                                               // If order variable is not empty then is passed to cheapestOption methods to check for cheapest option.
             returnString = cheapestOption(order.toString());
-            System.out.println("Return string: " + returnString);
             for (int i=2; i<returnString.split(" ").length; i++){
                 stockDetails.deleteID(tableName, returnString.split(" ")[i]);  // Delete all IDs from database that are ordered successfully.
             }
-           
+            OrderItem.orderForm(this.tableName, this.type, this.numberOfUnit, returnString);
         }
     }
 
@@ -183,7 +201,7 @@ public class Furniture {
             }
         }
 
-        return returnValue.replace("[", "");
+        return returnValue.replace("[", "").trim();
     }
 
 
