@@ -185,7 +185,11 @@ public class Furniture {
         }
     }
 
-
+    /**
+     * Method determines the cheapest possible combination of parts to create a full unit
+     * @param availableChoices Formatted string of all the available combinations
+     * @return Formatted string containing the cheapest option
+     */
     public String cheapestOption(String availableChoices){
         String [] temp= availableChoices.split("\n");
         int cheapest =1000000;
