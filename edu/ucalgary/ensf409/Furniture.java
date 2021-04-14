@@ -1,4 +1,4 @@
-//package statement should go here
+package edu.ucalgary.ensf409;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
