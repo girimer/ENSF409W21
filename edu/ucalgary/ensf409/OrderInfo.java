@@ -62,21 +62,5 @@ public class OrderInfo{
         }
     }
 
-    /**
-     * When an order is placed, removes ordered items from the inventory database.
-     * Current implementation is hardcoded for 4 types of furniture: chairs, desks, lamps and
-     * filing cabinets. Must be called after an order is completed.
-     */
-    public void updateInventory(Inventory toUpdate, String[] removeIDs){
-        //need database connection, so we pass our Inventory object
-        //each type of furniture has a unique ID format, so just call deleteID with each type
-        for(int i=0; i<removeIDs.length; i++){
-            toUpdate.deleteID("CHAIR",removeIDs[i]);
-            toUpdate.deleteID("DESK",removeIDs[i]);
-            toUpdate.deleteID("LAMP",removeIDs[i]);
-            toUpdate.deleteID("FILING",removeIDs[i]);
-        }
-        
-    }
-}
+
 
